@@ -14,7 +14,7 @@ class LoginScreenUI: UIView {
         let label = UILabel()
         label.text = "QuickDraw"
         label.font = UIFont(name: "Hiragino Mincho ProN W3", size: 40)
-        label.textColor = .black
+        label.textColor = .label
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.sizeToFit()
@@ -25,6 +25,7 @@ class LoginScreenUI: UIView {
     private lazy var  userNameLabel: UITextField = {
         let userName = UITextField()
         userName.placeholder = "Enter your Username"
+        userName.textColor = .label
         userName.textAlignment = .left
         userName.layer.borderColor = UIColor.blue.cgColor
         userName.layer.borderWidth = 1
@@ -39,6 +40,7 @@ class LoginScreenUI: UIView {
         let label = UITextField()
         label.placeholder = "Enter your Password"
         label.textAlignment = .left
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.borderColor = UIColor.blue.cgColor
         label.layer.borderWidth = 1
@@ -63,28 +65,19 @@ class LoginScreenUI: UIView {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.blue.cgColor
         button.setTitle("Sign In", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.label, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
 
         return button
     }()
 
-    private lazy var  registerButton: UIButton = {
-        let button = UIButton(type: .system)
-//      button.layer.borderWidth = 1
-//      button.layer.borderColor = UIColor.blue.cgColor
-        button.setTitle("Create account", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-
-        return button
-    }()
-
+  
     private func setupViews() {
-        for sub in [userCred, signInButton, registerButton, bigTitleLabel] {
+        for sub in [userCred, signInButton, bigTitleLabel] {
             sub.translatesAutoresizingMaskIntoConstraints = false
             addSubview(sub)
         }
+
         NSLayoutConstraint.activate([
             //UserLogin Stack
             userCred.centerXAnchor.constraint(equalTo: leadingAnchor, constant:  200),
@@ -94,15 +87,11 @@ class LoginScreenUI: UIView {
             signInButton.widthAnchor.constraint(equalToConstant: 200),
             signInButton.heightAnchor.constraint(equalToConstant: 50),
 
-            registerButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
-            registerButton.topAnchor.constraint(equalTo: topAnchor, constant: 450),
-
-
             signInButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 100),
             signInButton.topAnchor.constraint(equalTo: topAnchor, constant: 600),
 
             bigTitleLabel.centerXAnchor.constraint(equalTo: leadingAnchor, constant:  200),
-            bigTitleLabel.centerYAnchor.constraint(equalTo: topAnchor, constant: 100),
+            bigTitleLabel.centerYAnchor.constraint(equalTo: topAnchor, constant: 140),
 
         ])
     }
@@ -115,4 +104,7 @@ class LoginScreenUI: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+   
+
 }

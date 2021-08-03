@@ -10,33 +10,42 @@ import CryptoSwift
 
 class ViewController: UIViewController {
 
-    
+    private lazy var  registerButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Create account", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(pushtoRegisterPage), for: .touchUpInside)
+
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let loginView = LoginScreenUI()
+        view.backgroundColor = .systemBackground
+
+        let loginView = LoginScreenUI(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
         loginView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginView)
+        view.addSubview(registerButton)
 
         NSLayoutConstraint.activate([
             loginView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             loginView.topAnchor.constraint(equalTo: self.view.topAnchor),
             loginView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+
+            loginView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
+            loginView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+
+            registerButton.leadingAnchor.constraint(equalTo:  self.view.leadingAnchor, constant: 100),
+            registerButton.topAnchor.constraint(equalTo:  self.view.topAnchor, constant: 450),
         ])
-//        let user = "Loyd"
-//        let pswd: Array<UInt8> = Array("Potatos".utf8)
-//        let salt: Array<UInt8> = Array("mambo".utf8)
-//
-//        guard let key =
-//        try? PKCS5.PBKDF2.init(password: pswd, salt: salt, iterations: 4096, keyLength: 32, variant: .sha256).calculate()
-//        else {return}
-//
-//        print("This is my Key Hashed: \(key.toHexString())")
-//        print("End of Statement")
-        // Do any additional setup after loading the view.
     }
 
-
-
+    @objc func pushtoRegisterPage() {
+       let registerAccountVc = RegisterAccountController()
+        view.backgroundColor = .systemBackground
+        self.navigationController?.pushViewController(registerAccountVc, animated: false)
+    }
 }
